@@ -7,31 +7,26 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<header>
-		<img src="logo.png" alt="Logo">
-		<nav>
-			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Contact</a></li>
-			</ul>
-		</nav>
-	</header>
-	<main>
-		<section>
-			<h1>Class Information</h1>
-			<p>Number of Students: <span id="numStudents">20</span></p>
-		</section>
-		<section>
-			<button id="rollCallBtn">Roll Call</button>
-			<h2>Randomly Selected Student's Name:</h2>
-			<p id="selectedStudent"></p>
-		</section>
-	</main>
-	<footer>
-		<p>&copy; 2021 Random Roll Call</p>
-		<p>Contact us at info@randomrollcall.com</p>
-	</footer>
+	<div class="container">
+		<h1>Random Roll Call</h1>
+		<button class="btn btn-primary" id="roll-call-btn">Roll Call</button>
+		<p id="student-name"></p>
+	</div>
+	<div class="container">
+		<h1>Adding and Removing Students</h1>
+		<form>
+			<div class="form-group">
+				<label for="add-students">Add Students:</label>
+				<input type="number" class="form-control" id="add-students" placeholder="Enter number of students to add">
+			</div>
+			<div class="form-group">
+				<label for="remove-students">Remove Students:</label>
+				<input type="number" class="form-control" id="remove-students" placeholder="Enter number of students to remove">
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		<p>Total number of students: <span id="total-students"></span></p>
+	</div>
 	<script src="script.js"></script>
 </body>
 </html>

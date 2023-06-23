@@ -34,16 +34,16 @@ if __name__ == "__main__":
     #
 
     def fn_scenario_generation(input_feature):
-        sys.stdout.write("fn_scenario_generation")
+        print("fn_scenario_generation")
         # 数据库
         feature2scenarios_list = db_tools.select_all()
 
         similar_Feature2Scenarios = codegeneration.TopN_Feature2Scenarios(feature2scenarios_list, input_feature)
-        sys.stdout.write("Gherkin generating")
+        print("Gherkin generating")
         Gherkin_response, messages = codegeneration.Gherkin_generation(input_feature, similar_Feature2Scenarios)
-        sys.stdout.write("Scenario Parsing")
+        print("Scenario Parsing")
         Scenarios_List = codegeneration.Scenario_Parsing(Gherkin_response)
-        sys.stdout.write("Gherkin2NL")
+        print("Gherkin2NL")
         Gherkin_NL_List = codegeneration.Gherkin2NL(Scenarios_List, messages)
 
         # Gherkin_NL_List = []
@@ -65,7 +65,7 @@ if __name__ == "__main__":
         return output_dict
 
     def fn_scenario_add(*arg):
-        sys.stdout.write("fn_scenario_add")
+        print("fn_scenario_add")
 
         input_string = arg[-1]
         scenarios_string_list = list(arg[:-1])
@@ -74,9 +74,9 @@ if __name__ == "__main__":
                 return {globals()["scenarios_list"][i]: gr.update(visible=True), globals()["scenarios_list"][i].children[0].children[0]: input_string}
 
     def fn_code_generation(*args):
-        sys.stdout.write("fn_code_generation")
+        print("fn_code_generation")
         codegeneration.clear_static_html_dir()
-        # sys.stdout.write(args)
+        # print(args)
         # 数据库保存
 
         Gherkin_NL_List = []
@@ -87,14 +87,14 @@ if __name__ == "__main__":
         input_feature = args[-1]
 
         db_tools.insert(input_feature, Gherkin_NL_List)
-        sys.stdout.write("NL2Gherkin")
+        print("NL2Gherkin")
         # time.sleep(2)
         Gherkin_result = codegeneration.NL2Gherkin(Gherkin_NL_List, input_feature)
-        sys.stdout.write("Design_page_template_generation")
+        print("Design_page_template_generation")
         Design_page_template = codegeneration.Design_page_template_generation(Gherkin_result)
-        sys.stdout.write("Visual_design_template_generation")
+        print("Visual_design_template_generation")
         Visual_design_template = codegeneration.Visual_design_template_generation(Design_page_template)
-        sys.stdout.write("Code_generation")
+        print("Code_generation")
         Generated_code, loop_number = codegeneration.Code_generation(Visual_design_template, Design_page_template, input_feature, Gherkin_result)
 
         file_path = static_dir/"html/index.html"
@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
     def fn_code_modification(code_modification_suggestion_string, generated_code):
         codegeneration.clear_static_html_dir()
-        sys.stdout.write("Code_Modification")
+        print("Code_Modification")
         modified_code, messages, loop_number = codegeneration.Code_Modification(generated_code, code_modification_suggestion_string)
         output_path = os.path.join(static_dir, "html.zip")
         zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
@@ -124,7 +124,7 @@ if __name__ == "__main__":
         link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
         iframe = f"""<iframe src="file={file_path}" width="100%" height="500px"></iframe>"""
 
-        return link, output_path, modified_code,iframe
+        return link, output_path, modified_code, iframe
 
     with gr.Blocks(title="Human in the loop") as app:
 
@@ -216,5 +216,5 @@ if __name__ == "__main__":
         app.load(read_logs, None, logs, every=1)
 
     app.queue()
-    app.launch(show_error=True)
-    # app.launch()
+    # app.launch(show_error=True)
+    app.launch()

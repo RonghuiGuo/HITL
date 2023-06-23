@@ -1,8 +1,3 @@
-from difflib import SequenceMatcher
-from collections import namedtuple
-from bs4 import BeautifulSoup
-
-
 import os
 import os.path as osp
 import openai
@@ -14,6 +9,10 @@ import cv2
 import shutil
 import time
 import sqlite3
+
+from difflib import SequenceMatcher
+from collections import namedtuple
+from bs4 import BeautifulSoup
 
 
 class CodeGeneration():
@@ -31,35 +30,17 @@ class CodeGeneration():
         Config = namedtuple('Config', config_dict.keys())
         args = Config(**config_dict)
         self.args = args
-        openai.api_key = args.api_key
+        openai.api_key = os.environ.get("openai_api_key")
         self.get_prompt()
         self.set_proxy()
-        # # check if the instance exists in the cache
-        # instance = cache.get('code_generation_instance')
-        # # instance = None
-        # if instance is not None:
-        #     # if the instance exists in the cache, use it
-        #     self.__dict__ = dill.loads(instance).__dict__
-        # else:
-        #     # if the instance does not exist in the cache, create a new one and cache it
-        #     with open('index/utils/config/default.json', 'r') as file:
-        #         # Load the data from the file
-        #         config_dict = json.load(file)
-        #     Config = namedtuple('Config', config_dict.keys())
-        #     args = Config(**config_dict)
-        #     self.args = args
-        #     openai.api_key = args.api_key
-        #     self.get_prompt()
-        #     self.set_proxy()
 
-        #     cache.set('code_generation_instance', dill.dumps(self), timeout=60 * 60 * 24 * 30)
 
     @staticmethod
     def set_proxy():
-        os.environ["http_proxy"] = "http://127.0.0.1:12345"
-        os.environ["https_proxy"] = "http://127.0.0.1:12345"
-        os.environ["ALL_PROXY"] = "http://127.0.0.1:12345"
-        os.environ["all_proxy"] = "http://127.0.0.1:12345"
+        # os.environ["http_proxy"] = "http://127.0.0.1:12345"
+        # os.environ["https_proxy"] = "http://127.0.0.1:12345"
+        # os.environ["ALL_PROXY"] = "http://127.0.0.1:12345"
+        # os.environ["all_proxy"] = "http://127.0.0.1:12345"
 
         # os.environ["http_proxy"] = "http://127.0.0.1:12345"
         # os.environ["https_proxy"] = "http://127.0.0.1:12345"
@@ -71,11 +52,6 @@ class CodeGeneration():
         # os.environ["http_proxy"] = "http://172.24.48.1:10809"
         # os.environ["https_proxy"] = "http://172.24.48.1:10809"
         pass
-
-    def connect_database(self):
-        connention = sqlite3.connect(self.args.database_dir)
-        
-        return connention
 
     def TopN_Feature2Scenarios(self, feature2scenarios_list, input_feature):
 
@@ -133,7 +109,7 @@ class CodeGeneration():
                     temperature=self.args.temperature
                 )
             except Exception as e:
-                # self.logger.info(e)
+                print(e)
                 time.sleep(20)
                 continue
             if response["choices"][0]["finish_reason"] == "stop":

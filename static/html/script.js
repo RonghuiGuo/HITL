@@ -1,18 +1,41 @@
 
 
-const numStudents = document.getElementById("numStudents");
-const rollCallBtn = document.getElementById("rollCallBtn");
-const selectedStudent = document.getElementById("selectedStudent");
+// Random Roll Call
+const rollCallBtn = document.getElementById('roll-call-btn');
+const studentName = document.getElementById('student-name');
+const students = ['Alice', 'Bob', 'Charlie', 'David', 'Emily', 'Frank', 'Grace', 'Henry', 'Isabella', 'Jack'];
 
-let students = ["John", "Jane", "Bob", "Sue", "Mike", "Lisa", "Tom", "Mary", "David", "Karen", "Chris", "Amy", "Mark", "Julie", "Steve", "Emily", "Paul", "Anna", "Eric", "Megan"];
-
-rollCallBtn.addEventListener("click", function() {
-	let randomIndex = Math.floor(Math.random() * students.length);
-	selectedStudent.textContent = students[randomIndex];
+rollCallBtn.addEventListener('click', () => {
+	const randomIndex = Math.floor(Math.random() * students.length);
+	studentName.textContent = students[randomIndex];
 });
 
 // Adding and Removing Students
-// Not implemented in this version
+const addStudentsInput = document.getElementById('add-students');
+const removeStudentsInput = document.getElementById('remove-students');
+const totalStudents = document.getElementById('total-students');
+let numStudents = students.length;
 
-// Exclusion List
-// Not implemented in this version
+totalStudents.textContent = numStudents;
+
+document.querySelector('form').addEventListener('submit', (event) => {
+	event.preventDefault();
+	const numToAdd = parseInt(addStudentsInput.value);
+	const numToRemove = parseInt(removeStudentsInput.value);
+
+	if (!isNaN(numToAdd)) {
+		for (let i = 0; i < numToAdd; i++) {
+			students.push(`Student ${numStudents + 1}`);
+			numStudents++;
+		}
+	}
+
+	if (!isNaN(numToRemove)) {
+		students.splice(students.length - numToRemove, numToRemove);
+		numStudents -= numToRemove;
+	}
+
+	totalStudents.textContent = numStudents;
+	addStudentsInput.value = '';
+	removeStudentsInput.value = '';
+});

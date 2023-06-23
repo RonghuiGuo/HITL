@@ -1,6 +1,5 @@
 {
     "logs_dir": "logs/logs.log",
-    "api_key": "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",
     "model": "gpt-3.5-turbo",
     "temperature": 0,
     "static_dir":"./static",
