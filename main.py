@@ -9,7 +9,7 @@ import gradio as gr
 from utils.log import Logger
 from pathlib import Path
 from utils.CodeGeneration import CodeGeneration
-from utils.utils import zip_folder
+from utils.utils import zip_folder, iframe_generator
 from database.DB_Tools import DB_Tools
 
 
@@ -45,13 +45,6 @@ if __name__ == "__main__":
         Scenarios_List = codegeneration.Scenario_Parsing(Gherkin_response)
         print("Gherkin2NL")
         Gherkin_NL_List = codegeneration.Gherkin2NL(Scenarios_List, messages)
-
-        # Gherkin_NL_List = []
-        # Gherkin_NL_List.append("Scenario 1: As a user, when I am on the to-do list page, I can add a new to-do item with the title \"Buy groceries\". Once I add the item, it should be displayed on the list.")
-        # Gherkin_NL_List.append(
-        #     "Scenario 2: As a user, when I have a to-do item on the list with the title \"Buy groceries\", I can mark it as completed by clicking on the checkbox next to the item. Once I do so, the item should be marked as completed.")
-        # Gherkin_NL_List.append(
-        #     "Scenario 3: As a user, when I have a to-do item on the list with the title \"Buy groceries\", I can delete it by clicking on the delete button next to the item. Once I do so, the item should be removed from the list.")
 
         output_dict = {}
         for i in range(len(Gherkin_NL_List)):
@@ -100,7 +93,8 @@ if __name__ == "__main__":
         file_path = static_dir/"html/index.html"
         file_name = "index.html"
         link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
-        iframe = f"""<iframe src="file={file_path}" width="100%" height="500px"></iframe>"""
+
+        iframe = iframe_generator(file_path)
 
         output_path = os.path.join(static_dir, "html.zip")
         zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
@@ -122,7 +116,7 @@ if __name__ == "__main__":
         file_path = static_dir/"html/index.html"
         file_name = "index.html"
         link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
-        iframe = f"""<iframe src="file={file_path}" width="100%" height="500px"></iframe>"""
+        iframe = iframe_generator(file_path)
 
         return link, output_path, modified_code, iframe
 

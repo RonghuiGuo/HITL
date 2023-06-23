@@ -2,32 +2,19 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Random Roll Call</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-	<div class="container">
-		<h1>Random Roll Call</h1>
-		<button class="btn btn-primary" id="roll-call-btn">Roll Call</button>
-		<p id="student-name"></p>
-	</div>
-	<div class="container">
-		<h1>Adding and Removing Students</h1>
-		<form>
-			<div class="form-group">
-				<label for="add-students">Add Students:</label>
-				<input type="number" class="form-control" id="add-students" placeholder="Enter number of students to add">
-			</div>
-			<div class="form-group">
-				<label for="remove-students">Remove Students:</label>
-				<input type="number" class="form-control" id="remove-students" placeholder="Enter number of students to remove">
-			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
-		<p>Total number of students: <span id="total-students"></span></p>
-	</div>
-	<script src="script.js"></script>
-</body>
+  <head>
+    <title>Random Roll Call</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Random Roll Call</h1>
+      <p>Click the button below to randomly select a student's name:</p>
+      <button class="btn btn-primary">Roll Call</button>
+      <p>The selected student's name will be displayed here:</p>
+      <div id="selected-student"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
 

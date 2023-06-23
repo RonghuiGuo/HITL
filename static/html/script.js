@@ -1,41 +1,15 @@
 
 
-// Random Roll Call
-const rollCallBtn = document.getElementById('roll-call-btn');
-const studentName = document.getElementById('student-name');
-const students = ['Alice', 'Bob', 'Charlie', 'David', 'Emily', 'Frank', 'Grace', 'Henry', 'Isabella', 'Jack'];
-
-rollCallBtn.addEventListener('click', () => {
-	const randomIndex = Math.floor(Math.random() * students.length);
-	studentName.textContent = students[randomIndex];
-});
-
-// Adding and Removing Students
-const addStudentsInput = document.getElementById('add-students');
-const removeStudentsInput = document.getElementById('remove-students');
-const totalStudents = document.getElementById('total-students');
-let numStudents = students.length;
-
-totalStudents.textContent = numStudents;
-
-document.querySelector('form').addEventListener('submit', (event) => {
-	event.preventDefault();
-	const numToAdd = parseInt(addStudentsInput.value);
-	const numToRemove = parseInt(removeStudentsInput.value);
-
-	if (!isNaN(numToAdd)) {
-		for (let i = 0; i < numToAdd; i++) {
-			students.push(`Student ${numStudents + 1}`);
-			numStudents++;
-		}
-	}
-
-	if (!isNaN(numToRemove)) {
-		students.splice(students.length - numToRemove, numToRemove);
-		numStudents -= numToRemove;
-	}
-
-	totalStudents.textContent = numStudents;
-	addStudentsInput.value = '';
-	removeStudentsInput.value = '';
-});
+// Function to randomly select a student's name
+function rollCall() {
+  // Get the list of students from the system
+  var students = ["Student 1", "Student 2", "Student 3", "Student 4", "Student 5"];
+  // Get a random index from the list of students
+  var randomIndex = Math.floor(Math.random() * students.length);
+  // Get the selected student's name
+  var selectedStudent = students[randomIndex];
+  // Display the selected student's name on the screen
+  document.getElementById("selected-student").innerHTML = selectedStudent;
+}
+// Add event listener to the Roll Call button
+document.querySelector(".btn").addEventListener("click", rollCall);
