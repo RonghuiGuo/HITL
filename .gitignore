@@ -1,3 +1,4 @@
 static/html/*
 test
 **/__pychache__
+static/*.zip
