@@ -1,4 +1,0 @@
-Scenarios: [
-{Replacement Flag}
-]
-Instructions: Generate natural language that explains the scene from the Scenarios:
