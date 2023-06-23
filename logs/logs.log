@@ -1,0 +1,12 @@
+Running on local URL:  http://127.0.0.1:7860
+
+To create a public link, set `share=True` in `launch()`.
+fn_scenario_generation
+Gherkin generating
+Scenario Parsing
+Gherkin2NL
+fn_code_generation
+NL2Gherkin
+Design_page_template_generation
+Visual_design_template_generation
+Code_generation
