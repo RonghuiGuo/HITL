@@ -10,6 +10,7 @@ import shutil
 import time
 import sqlite3
 
+from pathlib import Path
 from difflib import SequenceMatcher
 from collections import namedtuple
 from bs4 import BeautifulSoup
@@ -33,6 +34,8 @@ class CodeGeneration():
         openai.api_key = os.environ.get("openai_api_key")
         self.get_prompt()
         self.set_proxy()
+
+
 
 
     @staticmethod
@@ -357,6 +360,8 @@ class CodeGeneration():
     def Code_Parsing(self, code):
         code_split = re.split("index.html:|style.css:|script.js:", code)
         try:
+            static_html_dir=Path(self.args.static_html_dir)
+            static_html_dir.mkdir(parents=True, exist_ok=True)
             with open(osp.join(self.args.static_html_dir, 'index.html'), 'w') as f:
                 f.write(code_split[1])
             with open(osp.join(self.args.static_html_dir, 'style.css'), 'w') as f:
@@ -393,6 +398,9 @@ class CodeGeneration():
                 continue
 
     def clear_static_html_dir(self):
+        static_html_dir=Path(self.args.static_html_dir)
+        static_html_dir.mkdir(parents=True, exist_ok=True)
+
         for file in os.listdir(self.args.static_html_dir):
             os.remove(osp.join(self.args.static_html_dir, file))
 
