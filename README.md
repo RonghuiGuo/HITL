@@ -41,10 +41,13 @@ ValueError: [<gradio.queueing.Event object at 0x7febc752c820>] is not in list
 line 425
 
 change
+
 """
 self.active_jobs[self.active_jobs.index(events)] = None
 """
+
 to
+
 """
 try:
     self.active_jobs[self.active_jobs.index(events)] = None
