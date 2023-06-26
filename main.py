@@ -11,11 +11,11 @@ from pathlib import Path
 from utils.CodeGeneration import CodeGeneration
 from utils.utils import zip_folder, iframe_generator
 from database.DB_Tools import DB_Tools
-
+from dotenv import load_dotenv
 
 # ----------log----------------
 sys.stdout = Logger("logs/logs.log")
-
+load_dotenv()
 
 if __name__ == "__main__":
 
@@ -66,6 +66,7 @@ if __name__ == "__main__":
             if scenarios_string_list[i] == "":
                 return {globals()["scenarios_list"][i]: gr.update(visible=True), globals()["scenarios_list"][i].children[0].children[0]: input_string}
 
+
     def fn_code_generation(*args):
         print("fn_code_generation")
         codegeneration.clear_static_html_dir()
@@ -110,6 +111,20 @@ if __name__ == "__main__":
         codegeneration.clear_static_html_dir()
         print("Code_Modification")
         modified_code, messages, loop_number = codegeneration.Code_Modification(generated_code, code_modification_suggestion_string)
+        output_path = os.path.join(static_dir, "html.zip")
+        zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
+
+        file_path = static_dir/"html/index.html"
+        file_name = "index.html"
+        link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
+        iframe = iframe_generator(file_path)
+
+        return link, output_path, modified_code, iframe
+
+    def fn_design_modification(code_modification_suggestion_string, generated_code):
+        codegeneration.clear_static_html_dir()
+        print("Design_Modification")
+        modified_code, messages, loop_number = codegeneration.Design_Modification(generated_code, code_modification_suggestion_string)
         output_path = os.path.join(static_dir, "html.zip")
         zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
 
@@ -172,6 +187,9 @@ if __name__ == "__main__":
                     html = gr.HTML(label="HTML preview", show_label=True)
                     pass
                 with gr.Row():
+                    globals()["design_modification_textbox"] = gr.Textbox(label="Design Modification Suggestions", scale=9)
+                    code_design_modification_btn = gr.Button(value="Design Modification", scale=1)
+                with gr.Row():
                     globals()["code_modification_textbox"] = gr.Textbox(label="Code Modification Suggestions", scale=9)
                     code_modification_btn = gr.Button(value="Code Modification", scale=1)
 
@@ -205,6 +223,9 @@ if __name__ == "__main__":
 
         code_modification_btn.click(fn=fn_code_modification, inputs=[globals()["code_modification_textbox"], generated_code_state],
                                     outputs=[html_markdown, gr_download_file, generated_code_state, html])
+        code_design_modification_btn.click(fn=fn_design_modification, inputs=[globals()["design_modification_textbox"], generated_code_state],
+                                    outputs=[html_markdown, gr_download_file, generated_code_state, html])
+        
 
         logs = gr.Textbox(label="Log")
         app.load(read_logs, None, logs, every=1)

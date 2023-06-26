@@ -14,7 +14,8 @@ from pathlib import Path
 from difflib import SequenceMatcher
 from collections import namedtuple
 from bs4 import BeautifulSoup
-
+from dotenv import load_dotenv
+load_dotenv()
 
 class CodeGeneration():
     # #单例 保证只有一个实例
@@ -101,6 +102,9 @@ class CodeGeneration():
 
         with open(osp.join(self.args.prompt_path, "Human_in_the_loop_prompt.txt"), "r", encoding="utf-8") as f:
             self.Human_in_the_loop_prompt = f.read()
+
+        with open(osp.join(self.args.prompt_path, "Design_modification_prompt.txt"), "r", encoding="utf-8") as f:
+            self.Design_modification_prompt = f.read()
 
     def ask_chatgpt(self, messages):
         extra_response_count = 0
@@ -396,6 +400,29 @@ class CodeGeneration():
             else:
                 # self.logger.info("Code modification failed, please try again")
                 continue
+
+    def Design_Modification(self, Generated_code, Code_Modification_String):
+        loop_number = 0
+
+        while True:
+            loop_number += 1
+            messages = []
+            Modified_code = ''
+            Design_modification_prompt = self.Design_modification_prompt.replace("{Code Replacement Flag}", Generated_code)
+            Design_modification_prompt = Design_modification_prompt.replace("{Instructions Replacement Flag}", Code_Modification_String)
+            messages.append({"role": "user", "content": Design_modification_prompt})
+            response, messages, extra_response_count = self.ask_chatgpt(messages)
+            messages.append({"role": "assistant", "content": response["choices"][0]["message"]["content"]})
+            Modified_code = self.handel_extra_response(extra_response_count, messages, Modified_code)
+            Modified_code = Modified_code+response["choices"][0]["message"]["content"]
+
+            if self.Code_Parsing(Modified_code) or loop_number > self.args.max_retry:
+                # self.logger.info("Code modification completed!")
+                return Modified_code, messages, loop_number
+            else:
+                # self.logger.info("Code modification failed, please try again")
+                continue
+
 
     def clear_static_html_dir(self):
         static_html_dir=Path(self.args.static_html_dir)
