@@ -27,7 +27,7 @@ When choosing a color palette, pick colors that have high contrast against each 
 Always remember, the beauty of a website lies in its usability and user experience. The use of beautiful colors and adherence to material design principles should enhance, not detract from, the overall user experience.
 
 
-Please follow the instructions to modify the code and format the output:
+Please re-generate the code as instructed and output it in the format and do not generate anything else:
 index.html:
 ...
 style.css:

@@ -66,7 +66,6 @@ if __name__ == "__main__":
             if scenarios_string_list[i] == "":
                 return {globals()["scenarios_list"][i]: gr.update(visible=True), globals()["scenarios_list"][i].children[0].children[0]: input_string}
 
-
     def fn_code_generation(*args):
         print("fn_code_generation")
         codegeneration.clear_static_html_dir()
@@ -156,7 +155,7 @@ if __name__ == "__main__":
 
                             def change_vis():
                                 return gr.update(value=""), gr.update(visible=False)
-                            globals()["del_btn_{i}"].click(fn=change_vis, outputs=[globals()["scenario_textbox_{i}"], globals()["scenario_{i}"]])
+                            globals()["del_btn_{i}"].click(fn=change_vis,inputs=None, outputs=[globals()["scenario_textbox_{i}"], globals()["scenario_{i}"]])
                     else:
                         with gr.Row(visible=False) as globals()["scenario_{i}"]:
                             globals()["scenario_textbox_{i}"] = gr.Textbox(interactive=True, label=f"Scenario", lines=2, scale=9)
@@ -164,7 +163,7 @@ if __name__ == "__main__":
 
                             def change_vis():
                                 return gr.update(value=""), gr.update(visible=False)
-                            globals()["del_btn_{i}"].click(fn=change_vis, outputs=[globals()["scenario_textbox_{i}"], globals()["scenario_{i}"]])
+                            globals()["del_btn_{i}"].click(fn=change_vis, inputs=None,outputs=[globals()["scenario_textbox_{i}"], globals()["scenario_{i}"]])
 
                     scenarios_list.append(globals()["scenario_{i}"])
                     scenarios_textbox_list.append(globals()["scenario_textbox_{i}"])
@@ -224,12 +223,11 @@ if __name__ == "__main__":
         code_modification_btn.click(fn=fn_code_modification, inputs=[globals()["code_modification_textbox"], generated_code_state],
                                     outputs=[html_markdown, gr_download_file, generated_code_state, html])
         code_design_modification_btn.click(fn=fn_design_modification, inputs=[globals()["design_modification_textbox"], generated_code_state],
-                                    outputs=[html_markdown, gr_download_file, generated_code_state, html])
-        
+                                           outputs=[html_markdown, gr_download_file, generated_code_state, html])
 
-        logs = gr.Textbox(label="Log",max_lines=5)
-        app.load(read_logs, None, logs, every=1,queue=True,scroll_to_output=True)
+        logs = gr.Textbox(label="Log", max_lines=5)
+        app.load(read_logs, None, logs, every=1, queue=True, scroll_to_output=True)
 
-    app.queue()
+    app.queue().launch()
     # app.launch(show_error=True)
-    app.launch()
+
