@@ -41,10 +41,10 @@ class CodeGeneration():
 
     @staticmethod
     def set_proxy():
-        # os.environ["http_proxy"] = "http://127.0.0.1:12345"
-        # os.environ["https_proxy"] = "http://127.0.0.1:12345"
-        # os.environ["ALL_PROXY"] = "http://127.0.0.1:12345"
-        # os.environ["all_proxy"] = "http://127.0.0.1:12345"
+        os.environ["http_proxy"] = "http://127.0.0.1:12345"
+        os.environ["https_proxy"] = "http://127.0.0.1:12345"
+        os.environ["ALL_PROXY"] = "http://127.0.0.1:12345"
+        os.environ["all_proxy"] = "http://127.0.0.1:12345"
 
         # os.environ["http_proxy"] = "http://127.0.0.1:12345"
         # os.environ["https_proxy"] = "http://127.0.0.1:12345"
@@ -425,11 +425,13 @@ class CodeGeneration():
 
 
     def clear_static_html_dir(self):
-        static_html_dir=Path(self.args.static_html_dir)
+        static_html_dir = Path(self.args.static_html_dir)
         static_html_dir.mkdir(parents=True, exist_ok=True)
 
         for file in os.listdir(self.args.static_html_dir):
             os.remove(osp.join(self.args.static_html_dir, file))
+
+            
 
     def copyfile2static_html_dir(self, origin_dir):
         for file in os.listdir(origin_dir):

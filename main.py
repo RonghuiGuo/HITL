@@ -227,8 +227,8 @@ if __name__ == "__main__":
                                     outputs=[html_markdown, gr_download_file, generated_code_state, html])
         
 
-        logs = gr.Textbox(label="Log")
-        app.load(read_logs, None, logs, every=1)
+        logs = gr.Textbox(label="Log",max_lines=5)
+        app.load(read_logs, None, logs, every=1,queue=True,scroll_to_output=True)
 
     app.queue()
     # app.launch(show_error=True)
