@@ -63,3 +63,4 @@ def main(code_file_path: str):
 if __name__ == "__main__":
     code_file_path = input("Please provide a JavaScript file:\n")
     main(code_file_path=code_file_path)
+    # TODO: examples are added and are located in the examples folder :)
