@@ -46,3 +46,17 @@ def check_deprecated(api_dict: dict) -> bool:
     :return: True if the API entry is marked as deprecated, False otherwise.
     """
     return api_dict.get("deprecated", False)
+
+def get_exceptions_to_handle(fqn: str, KG: list[dict]) -> Optional[dict]:
+    """
+    Retrieves the exceptions to be handled for a given fully qualified name (FQN) from the knowledge graph.
+
+    :param fqn: The fully qualified name of the API.
+    :param KG: The knowledge graph containing API information.
+    :return: A dictionary representing the exceptions to handle, or None if no exceptions are found for the given FQN.
+    """
+    for api_dict in KG:
+        if api_dict["api_fqn"] == fqn:
+            return api_dict["exceptions"]
+    return None
+
