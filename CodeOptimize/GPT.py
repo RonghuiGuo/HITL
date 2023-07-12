@@ -29,7 +29,7 @@ class GPT:
         :param code_snippet: The code snippet to analyze and extract the APIs from.
         :return: The list of FQNs of APIs mentioned in the code snippet.
         """
-        prompt = code_snippet + "\nList the FQNs"
+        prompt = code_snippet
 
         self.conversation.append({"role": "user", "content": prompt})
 
