@@ -34,7 +34,7 @@ def check_valid(fqn: str, KG: list[dict]) -> Optional[dict]:
     """
 
     for api_dict in KG:
-        if api_dict["api_fqn"] == fqn:
+        if api_dict["api_fqn"].lower() == fqn.lower():
             return api_dict
     return None
 
@@ -56,7 +56,7 @@ def get_exceptions_to_handle(fqn: str, KG: list[dict]) -> Optional[dict]:
     :return: A dictionary representing the exceptions to handle, or None if no exceptions are found for the given FQN.
     """
     for api_dict in KG:
-        if api_dict["api_fqn"] == fqn:
+        if api_dict["api_fqn"].lower() == fqn.lower():
             return api_dict["exceptions"]
     return None
 
