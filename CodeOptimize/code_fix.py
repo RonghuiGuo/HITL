@@ -3,7 +3,7 @@
 import openai
 import re
 
-file_path = "code_fix_prompt.txt"
+file_path = "./prompts_templates/code_fix_prompt.txt"
 
 with open(file_path, "r") as file:
     code_fix_prompt = file.read()
