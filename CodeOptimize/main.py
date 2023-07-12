@@ -29,33 +29,33 @@ def main(code_file_path: str):
     code_generate_prompts = get_few_shots(code_generate_prompts_file)
     exception_check_prompts = get_few_shots(exception_check_prompts_file)
     exception_add_prompts = get_few_shots(exception_add_prompts_file)
-    code_fix_prompts = get_few_shots(code_fix_prompts_file)
     code_snippet = parse_code(js_file=code_file_path)
 
-    # proxies = {'http': "http://127.0.0.1:10010",
-    #            'https': "http://127.0.0.1:10010"}
+    # proxies = {'http': "http://127.0.0.1:10792",
+    #            'https': "http://127.0.0.1:10792"}
     # openai.proxy = proxies
 
     # OPENAI API key configuration
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    # TODO: update API key
+    openai.api_key = "API_KEY"
 
     kg = load_KG(os.getcwd() + "/knowledge_graph/js_kg.json")
 
-    print("Code checking...")
+    print("Code checking...\n")
     codeChecker = CodeChecker(kg, fqn_prompts, code_generate_prompts)
-    refined_code = codeChecker.code_check(code_snippet, 10)
-    print("Code analysis completed. Refined code:")
+    refined_code = codeChecker.code_check(code_snippet, max_loop=5)
+    print("Code checking analysis completed. Rectified code:")
     print(refined_code)
     print()
 
-    print("Checking exceptions in code...")
+    print("Checking exceptions in code...\n")
     exceptionChecker = ExceptionChecker(kg, fqn_prompts, exception_check_prompts=exception_check_prompts, exception_handle_prompts=exception_add_prompts)
     exceptionChecker.code_check(refined_code)
     print(f"Exception code analysis completed. Refined code:")
     print(refined_code)
     print()
 
-    print("Code fixing...")
+    print("Code fixing...\n")
     response, fixed_code = fix_code(refined_code)
     print("Error Detection:")
     print(response)
