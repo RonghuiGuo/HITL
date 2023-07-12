@@ -64,6 +64,10 @@ def code_fix_with_16k(code):
 
 def fix_code(code):
     response = code_fix_with_16k(code)
+    if "Code error identified:" in response:
+        # Extract the first two rows
+        response = response.split("\n")[0:2]
+        response = "\n".join(response)
     fixed_code_block = extract_code_block(response)
     return response, fixed_code_block.strip() if fixed_code_block else code.strip()
     
