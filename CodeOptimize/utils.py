@@ -45,7 +45,7 @@ def check_deprecated(api_dict: dict) -> bool:
     :param api_dict: The dictionary representing an API entry.
     :return: True if the API entry is marked as deprecated, False otherwise.
     """
-    return api_dict.get("deprecated", False)
+    return api_dict["deprecated"]
 
 def get_exceptions_to_handle(fqn: str, KG: list[dict]) -> Optional[dict]:
     """
