@@ -65,8 +65,8 @@ def code_fix_with_16k(code):
 def fix_code(code):
     response = code_fix_with_16k(code)
     fixed_code_block = extract_code_block(response)
-    return fixed_code_block.strip() if fixed_code_block else code.strip()
-
+    return response, fixed_code_block.strip() if fixed_code_block else code.strip()
+    
 if __name__ == "__main__":
     code =  """
         function exampleFunc(a, b, c) {
