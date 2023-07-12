@@ -6,7 +6,7 @@ class ExceptionChecker:
     This class checks and modifies a code snippet for unhandled exceptions.
     It adds exception handling and ensures all exceptions are properly handled.
     """
-    
+
     def __init__(self, knowledge_graph: [dict], fqn_prompts: str, exception_check_prompts: str, exception_handle_prompts: str):
         self.knowledge_graph = knowledge_graph
         self.fqn_prompts = fqn_prompts
