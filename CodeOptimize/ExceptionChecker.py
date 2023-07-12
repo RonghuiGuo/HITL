@@ -37,12 +37,11 @@ class ExceptionChecker:
             fqn_list = fqn_parser.get_apis_in_code(code_snippet)
             print("Extracting Fully Qualified Names...")
             for index, fqn in enumerate(fqn_list, start=1):
-                print(f"{index}. {fqn}")
+                print(f"    {index}. {fqn}")
             print()
 
             print(f"Checking whether APIs contain unhandled exceptions...")
             for fqn in fqn_list:
-                print(f"Checking \'{fqn}\'...")
                 exceptions_dict_list = get_exceptions_to_handle(fqn, self.knowledge_graph)
                 if exceptions_dict_list:
                     for exception_dict in exceptions_dict_list:
@@ -51,14 +50,12 @@ class ExceptionChecker:
                         handled = exception_checker.check_exceptions_handled(code_snippet, fqn, exception_to_handle)
 
                         if handled:
-                            print(f"No unhandled exceptions found for \'{fqn}\'.")
                             continue
 
                         excpt_to_add_list.append((fqn, exception_to_handle, condition))
                         unhandled_exceptions_set.add(exception_to_handle)
-                        print(f"\'{exception_to_handle}\' is not handled for \\{fqn}\'!")
+                        print(f"    \'{exception_to_handle}\' is not handled for \\{fqn}\'!")
 
-            print()
             if not excpt_to_add_list:
                 print(f"All exceptions are appropriately handled within the code!\n")
                 break
