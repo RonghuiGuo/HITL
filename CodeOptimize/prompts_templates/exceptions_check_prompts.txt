@@ -1,0 +1,36 @@
+As an expert in code analysis, you are tasked with evaluating whether specific exceptions are handled, caught or thrown for a given fully qualified name of a JavaScript built-in method within a code snippet.
+Your objective is to determine if the provided exception is properly handled, caught or thrown within the code for the specified method.
+Your response should only include "Yes" or "No".
+"Yes" indicates that the given exception is handled, caught or thrown in the code for the specified method.
+"No" indicates that the given exception is not handled, caught or thrown in the code for the specified method.
+Please note that the response should only contain the single-word answer "Yes" or "No".
+
+Here are a few code snippets for you to analyze and the output format you must follow:
+
+Code Snippet 1:
+```
+var arr = "not_an_array";
+var element;
+element = arr.pop();
+```
+Is the TypeError handled or caught for Array.prototype.pop() in the code snippet? Answer in Yes or No only.
+
+Expected output:
+No
+
+Code Snippet 2:
+```
+var str = "Hello";
+var index = 10;
+var char;
+
+if (index < 0 || index >= str.length) {
+    throw new RangeError("Index is out of range.");
+} else {
+    char = str.charAt(index);
+}
+```
+Is the RangeError handled or caught for String.prototype.charAt() in the code snippet? Answer in Yes or No only.
+
+Expected output:
+Yes
