@@ -5,8 +5,8 @@ import re
 
 file_path = "code_fix_prompt.txt"
 
-with open(file_path, "r") as file:
-    code_fix_prompt = file.read()
+# with open(file_path, "r") as file:
+#     code_fix_prompt = file.read()
 
 def extract_code_block(text):
     pattern1 = r"'''([^`]+)'''"  # 3个单引号

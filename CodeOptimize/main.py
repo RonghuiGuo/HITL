@@ -14,11 +14,11 @@ def get_few_shots(few_shot_file):
         few_shots = file.read()
     return few_shots
 
-fqn_prompts_file = os.getcwd() + "prompts_templates/fqn_prompts.txt"
-code_generate_prompts_file = os.getcwd() + "prompts_templates/code_generate_prompts.txt"
-exception_check_prompts_file = os.getcwd() + "prompts_templates/exceptions_check_prompts.txt"
-exception_add_prompts_file = os.getcwd() + "prompts_templates/exceptions_add_prompts.txt"
-code_fix_prompts_file = os.getcwd() + "prompts_templates/code_fix_prompt.txt"
+fqn_prompts_file = os.getcwd() + "/prompts_templates/fqn_prompts.txt"
+code_generate_prompts_file = os.getcwd() + "/prompts_templates/code_generate_prompts.txt"
+exception_check_prompts_file = os.getcwd() + "/prompts_templates/exceptions_check_prompts.txt"
+exception_add_prompts_file = os.getcwd() + "/prompts_templates/exceptions_add_prompts.txt"
+code_fix_prompts_file = os.getcwd() + "/prompts_templates/code_fix_prompt.txt"
 
 # js_file = "../data/Random Roll Call Page/app.js"
 
@@ -39,7 +39,7 @@ def main(code_file_path: str):
     # OPENAI API key configuration
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
-    kg = load_KG(os.getcwd() + "/js_kg.json")
+    kg = load_KG(os.getcwd() + "/knowledge_graph/js_kg.json")
 
     print("Code checking...")
     codeChecker = CodeChecker(kg, fqn_prompts, code_generate_prompts)
