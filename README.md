@@ -13,9 +13,9 @@ ERROR:
 
 可能是此bug导致log框输出不了
 
-https://github.com/gradio-app/gradio/issues/2290
-https://github.com/gradio-app/gradio/issues/2261
-https://github.com/gradio-app/gradio/issues/4061
+- https://github.com/gradio-app/gradio/issues/2290
+- https://github.com/gradio-app/gradio/issues/2261
+- https://github.com/gradio-app/gradio/issues/4061
 
 ```
 future: <Task finished name='oqhjdrbdel_15' coro=<Queue.process_events() done, defined at /home/user/.local/lib/python3.10/site-packages/gradio/queueing.py:342> exception=ValueError('[<gradio.queueing.Event object at 0x7febc752c820>] is not in list')>
