@@ -171,7 +171,6 @@ if __name__ == "__main__":
             with gr.Column(visible=False) as globals()["scenario_add"]:
                 with gr.Row():
                     globals()["scenario_add_textbox"] = gr.Textbox(interactive=True, label="Your new scenario:", lines=2, scale=9)
-                    # globals()["scenario_add_btn"] = gr.Button(value="Add")
                     scenario_add_btn = gr.Button(value="Add", scale=1)
                 code_generation_btn = gr.Button(value="Code Generation")
 
@@ -228,6 +227,7 @@ if __name__ == "__main__":
         logs = gr.Textbox(label="Log", max_lines=5)
         app.load(read_logs, None, logs, every=1, queue=True, scroll_to_output=True)
 
-    app.queue().launch()
+    app.queue()
     # app.launch(show_error=True)
+    app.launch()
 

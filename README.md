@@ -4,11 +4,9 @@
 Please generate a web page with a random roll call function.
 
 
-
 Problems:
 
 model由gpt-3.5-turbo改成gpt-3.5-turbo-0613后结果会发生很大的变化
-
 
 
 ERROR:

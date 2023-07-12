@@ -41,10 +41,10 @@ class CodeGeneration():
 
     @staticmethod
     def set_proxy():
-        os.environ["http_proxy"] = "http://127.0.0.1:12345"
-        os.environ["https_proxy"] = "http://127.0.0.1:12345"
-        os.environ["ALL_PROXY"] = "http://127.0.0.1:12345"
-        os.environ["all_proxy"] = "http://127.0.0.1:12345"
+        # os.environ["http_proxy"] = "http://127.0.0.1:12345"
+        # os.environ["https_proxy"] = "http://127.0.0.1:12345"
+        # os.environ["ALL_PROXY"] = "http://127.0.0.1:12345"
+        # os.environ["all_proxy"] = "http://127.0.0.1:12345"
 
         # os.environ["http_proxy"] = "http://127.0.0.1:12345"
         # os.environ["https_proxy"] = "http://127.0.0.1:12345"
