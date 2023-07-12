@@ -14,7 +14,6 @@ console.log(sum);
 
 'Array.prototype.redcee()' is an invalid method, correct the invalid 'Array.prototype.redcee()' method in the code.
 
-Expected Output for example 1:
 var numbers = [1, 2, 3, 4, 5];
 var sum = numbers.reduce(function(a, b) {
     return a + b;
@@ -29,7 +28,6 @@ console.loggged(wordCount);
 'String.prototype.splat()' is an invalid method, correct the invalid 'String.prototype.splat()' method in the code.
 'console.loggged()' is an invalid method, correct the invalid 'console.loggged()' method in the code.
 
-Expected Output for example 2:
 var sentence = "The quick brown fox jumps over the lazy dog";
 var wordCount = sentence.split(" ").length;
 console.log(wordCount);
