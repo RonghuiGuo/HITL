@@ -57,6 +57,16 @@ class CodeChecker:
                 print(f"Done.\n")
                 break
 
+            print(f"{len(invalid_api_list)} invalid apis found:")
+            for index, fqn in enumerate(invalid_api_list, start=1):
+                print(f"{index}. {fqn}")
+            print()
+
+            print(f"{len(deprecated_api_list)} invalid apis found:")
+            for index, fqn in enumerate(deprecated_api_list, start=1):
+                print(f"{index}. {fqn}")
+            print()
+
             feedback_prompt = code_generator.generate_feedback_prompt(invalid_api_list, deprecated_api_list)
             corrected_code = code_generator.feedback4correction(code_snippet, feedback_prompt)
             code_snippet = corrected_code
