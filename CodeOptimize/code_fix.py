@@ -5,8 +5,8 @@ import re
 
 file_path = "code_fix_prompt.txt"
 
-# with open(file_path, "r") as file:
-#     code_fix_prompt = file.read()
+with open(file_path, "r") as file:
+    code_fix_prompt = file.read()
 
 def extract_code_block(text):
     pattern1 = r"'''([^`]+)'''"  # 3个单引号
@@ -24,7 +24,7 @@ def extract_code_block(text):
         else:
             return None
 
-def code_fix_with_16k(prompt):
+def code_fix_with_16k(code):
     example_error_1 = "console.log(\"Hello, World\";"
     example_answer_1 = """
         Code error identified: Syntax error
@@ -51,7 +51,7 @@ def code_fix_with_16k(prompt):
             {"role": "system", "content": example_answer_1},
             {"role": "user", "content": example_error_2},
             {"role": "system", "content": example_answer_2},
-            {"role": "user", "content": prompt},
+            {"role": "user", "content": code},
         ],
         temperature=0,
         max_tokens=1024,
