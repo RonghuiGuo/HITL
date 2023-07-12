@@ -17,6 +17,8 @@ ERROR:
 - https://github.com/gradio-app/gradio/issues/2261
 - https://github.com/gradio-app/gradio/issues/4061
 
+
+ERROR OUTPUT:
 ```
 future: <Task finished name='oqhjdrbdel_15' coro=<Queue.process_events() done, defined at /home/user/.local/lib/python3.10/site-packages/gradio/queueing.py:342> exception=ValueError('[<gradio.queueing.Event object at 0x7febc752c820>] is not in list')>
 Traceback (most recent call last):
@@ -35,9 +37,10 @@ ValueError: [<gradio.queueing.Event object at 0x7febc752c820>] is not in list
 ```
 
 ```
+# line 425
 /home/user/.local/lib/python3.10/site-packages/gradio/queueing.py
 ```
-line 425
+
 
 
 ```
