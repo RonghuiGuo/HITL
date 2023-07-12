@@ -5,26 +5,20 @@ Your objective is to accurately identify and provide the FQNs of these methods/f
 Here are a few code snippets for you to analyze and the output format you must follow:
 
 Code Snippet 1:
-```
 var numbers = [1, 2, 3, 4, 5];
 var sum = numbers.reduce(function(a, b) {
     return a + b;
 });
 console.log(sum);
-```
-Expected FQNs:
 
 ```Array.prototype.reduce()```
 ```console.log()```
 
 Code Snippet 2:
-```
 var sentence = "The quick brown fox jumps over the lazy dog";
 var wordCount = sentence.split(" ").length;
 console.log(wordCount);
-```
-Expected FQNs:
+
 ```String.prototype.split()```
 ```Array.prototype.length()```
 ```console.log()```
-
