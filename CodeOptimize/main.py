@@ -56,7 +56,9 @@ def main(code_file_path: str):
     print()
 
     print("Code fixing...")
-    fixed_code = fix_code(refined_code)
+    response, fixed_code = fix_code(refined_code)
+    print("Error Detection:")
+    print(response)
     print("Code fix completed. Fixed Code:")
     print(fixed_code)
 
