@@ -10,10 +10,21 @@ Visual Description: [
 ]
 Instructions: Combining Scenarios, Page templates and visual descriptions to generate simple web code (include .html, .css, .js) for the task.
 Note: There is no back-end for this feature, so please use the front-end code to implement the back-end functionality involved.
-Please generate the codes for the three files in the following format:
+Please generate the codes for the three files in <Code> without any note:
 index.html:
-...
+```html
+<Code>
+```
+end index.html
+
 style.css:
-...
+```css
+<Code>
+```
+end style.css
+
 script.js:
-...
+```javascript
+<Code>
+```
+end script.js

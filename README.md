@@ -3,6 +3,8 @@
 
 Please generate a web page with a random roll call function.
 
+Generate a roll call statistics system, you can add students, delete students, click to confirm the record check-in date.
+
 
 ## Problems:
 
@@ -40,8 +42,6 @@ ValueError: [<gradio.queueing.Event object at 0x7febc752c820>] is not in list
 # line 425
 /home/user/.local/lib/python3.10/site-packages/gradio/queueing.py
 ```
-
-
 
 ```
 self.active_jobs[self.active_jobs.index(events)] = None
