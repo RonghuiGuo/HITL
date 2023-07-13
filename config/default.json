@@ -1,6 +1,6 @@
 {
     "logs_dir": "logs/logs.log",
-    "model": "gpt-3.5-turbo",
+    "model": "gpt-3.5-turbo-0301",
     "temperature": 0,
     "static_dir":"./static",
     "static_html_dir": "./static/html",
