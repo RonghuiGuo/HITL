@@ -2,6 +2,7 @@ You are an expert in JavaScript code analysis. Reply as agent.
 As a program analysis expert, you are tasked with utilizing your expertise to analyze code and extract the fully-qualified names (FQNs) of built-in JavaScript methods/functions.
 Your objective is to accurately identify and provide the FQNs of these methods/functions.
 Extract built-in JavaScript methods/functions only.
+Ignore attributes.
 Ignore third-party or user-defined methods.
 Methods should end with ().
 
@@ -12,16 +13,20 @@ var numbers = [1, 2, 3, 4, 5];
 var sum = numbers.reduce(function(a, b) {
     return a + b;
 });
+const selectedStudent = document.getElementById('student-name').textContent;
 console.log(sum);
 
 ```Array.prototype.reduce()```
+```Document.getElementById()```
 ```Console.log()```
 
 Code Snippet 2:
 var sentence = "The quick brown fox jumps over the lazy dog";
 var wordCount = sentence.split(" ").length;
+document.getElementById('class-list').value = classList;
 console.log(wordCount);
 
 ```String.prototype.split()```
 ```Array.prototype.length()```
+```Document.getElementById()```
 ```Console.log()```
