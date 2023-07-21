@@ -123,16 +123,16 @@ if __name__ == "__main__":
 
     def fn_code_modification_aider(code_modification_suggestion_string, generated_code):
         print("Code_Modification")
-        
+
         testdir = "static/html"
-        model_name="gpt-3.5-turbo-0613"
-        edit_format="whole" 
-        tries=2 
-        no_unit_tests=True 
-        no_aider=False 
-        verbose=False 
-        commit_hash="e3aa9db-dirty"
-        edit_purpose="code"
+        model_name = "gpt-3.5-turbo-0613"
+        edit_format = "whole"
+        tries = 2
+        no_unit_tests = True
+        no_aider = False
+        verbose = False
+        commit_hash = "e3aa9db-dirty"
+        edit_purpose = "code"
         # repo = git.Repo(search_parent_directories=True)
         # commit_hash = repo.head.object.hexsha[:7]
         # if repo.is_dirty():
@@ -150,7 +150,7 @@ if __name__ == "__main__":
         # 和fn_design_modification接口不一样，不清楚用途，赋空值
         modified_code = ""
 
-        return link, output_path, modified_code, iframe   
+        return link, output_path, modified_code, iframe
 
     def fn_design_modification(code_modification_suggestion_string, generated_code):
         codegeneration.clear_static_html_dir()
@@ -165,20 +165,20 @@ if __name__ == "__main__":
         iframe = iframe_generator(file_path)
 
         return link, output_path, modified_code, iframe
-    
+
     def fn_design_modification_aider(code_modification_suggestion_string, generated_code):
 
         print("Design_Modification")
-        
+
         testdir = "static/html"
-        model_name="gpt-3.5-turbo-0613"
-        edit_format="whole" 
-        tries=2 
-        no_unit_tests=True 
-        no_aider=False 
-        verbose=False 
-        commit_hash="e3aa9db-dirty"
-        edit_purpose="code"
+        model_name = "gpt-3.5-turbo-0613"
+        edit_format = "whole"
+        tries = 2
+        no_unit_tests = True
+        no_aider = False
+        verbose = False
+        commit_hash = "e3aa9db-dirty"
+        edit_purpose = "code"
         # repo = git.Repo(search_parent_directories=True)
         # commit_hash = repo.head.object.hexsha[:7]
         # if repo.is_dirty():
@@ -196,7 +196,7 @@ if __name__ == "__main__":
         # 和fn_design_modification接口不一样，不清楚用途，赋空值
         modified_code = ""
 
-        return link, output_path, modified_code, iframe       
+        return link, output_path, modified_code, iframe
 
     with gr.Blocks(title="Human in the loop") as app:
 
@@ -248,9 +248,9 @@ if __name__ == "__main__":
                     gr_download_file = gr.File()
                     html = gr.HTML(label="HTML preview", show_label=True)
                     pass
-                with gr.Row():
-                    globals()["design_modification_textbox"] = gr.Textbox(label="Design Modification Suggestions", scale=9)
-                    code_design_modification_btn = gr.Button(value="Design Modification", scale=1)
+                # with gr.Row():
+                #     globals()["design_modification_textbox"] = gr.Textbox(label="Design Modification Suggestions", scale=9)
+                #     code_design_modification_btn = gr.Button(value="Design Modification", scale=1)
                 with gr.Row():
                     globals()["code_modification_textbox"] = gr.Textbox(label="Code Modification Suggestions", scale=9)
                     code_modification_btn = gr.Button(value="Code Modification", scale=1)
@@ -283,10 +283,10 @@ if __name__ == "__main__":
         # download_btn.click(fn=download_file, outputs=globals()["download_file"])
         # download_btn.click(fn=fn_download_file, outputs=gr_download_file)
 
-        code_modification_btn.click(fn=fn_code_modification_aider, inputs=[globals()["code_modification_textbox"], generated_code_state],
+        code_modification_btn.click(fn=fn_code_modification, inputs=[globals()["code_modification_textbox"], generated_code_state],
                                     outputs=[html_markdown, gr_download_file, generated_code_state, html])
-        code_design_modification_btn.click(fn=fn_design_modification_aider, inputs=[globals()["design_modification_textbox"], generated_code_state],
-                                           outputs=[html_markdown, gr_download_file, generated_code_state, html])
+        # code_design_modification_btn.click(fn=fn_design_modification_aider, inputs=[globals()["design_modification_textbox"], generated_code_state],
+        #                                    outputs=[html_markdown, gr_download_file, generated_code_state, html])
 
         logs = gr.Textbox(label="Log", max_lines=5)
         app.load(read_logs, None, logs, every=3, queue=True, scroll_to_output=True)
