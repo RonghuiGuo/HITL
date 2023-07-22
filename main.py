@@ -12,6 +12,7 @@ from utils.CodeGeneration import CodeGeneration
 from utils.utils import zip_folder, iframe_generator
 from database.DB_Tools import DB_Tools
 from dotenv import load_dotenv
+# from AiderModify.ModifyCodeAider import modify_code_aider
 
 # ----------log----------------
 sys.stdout = Logger("logs/logs.log")
@@ -81,8 +82,8 @@ if __name__ == "__main__":
 
         db_tools.insert(input_feature, Gherkin_NL_List)
         print("NL2Gherkin")
-        # time.sleep(2)
         Gherkin_result = codegeneration.NL2Gherkin(Gherkin_NL_List, input_feature)
+        time.sleep(15)
         print("Design_page_template_generation")
         Design_page_template = codegeneration.Design_page_template_generation(Gherkin_result)
         print("Visual_design_template_generation")
@@ -90,7 +91,7 @@ if __name__ == "__main__":
         print("Code_generation")
         Generated_code, loop_number = codegeneration.Code_generation(Visual_design_template, Design_page_template, input_feature, Gherkin_result)
 
-        file_path = static_dir/"html/index.html"
+        file_path="static/html/index.html"+'?time='+str(time.time())
         file_name = "index.html"
         link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
 
@@ -113,12 +114,43 @@ if __name__ == "__main__":
         output_path = os.path.join(static_dir, "html.zip")
         zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
 
-        file_path = static_dir/"html/index.html"
+        file_path="static/html/index.html"+'?time='+str(time.time())
         file_name = "index.html"
         link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
         iframe = iframe_generator(file_path)
 
         return link, output_path, modified_code, iframe
+
+    # def fn_code_modification_aider(code_modification_suggestion_string, generated_code):
+    #     print("Code_Modification")
+
+    #     testdir = "static/html"
+    #     model_name = "gpt-3.5-turbo-0613"
+    #     edit_format = "whole"
+    #     tries = 2
+    #     no_unit_tests = True
+    #     no_aider = False
+    #     verbose = False
+    #     commit_hash = "e3aa9db-dirty"
+    #     edit_purpose = "code"
+    #     # repo = git.Repo(search_parent_directories=True)
+    #     # commit_hash = repo.head.object.hexsha[:7]
+    #     # if repo.is_dirty():
+    #     #     commit_hash += "-dirty"
+    #     modify_code_aider(code_modification_suggestion_string, edit_purpose, testdir, model_name, edit_format, tries, no_unit_tests, no_aider, verbose, commit_hash)
+
+    #     output_path = os.path.join(static_dir, "html.zip")
+    #     zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
+
+    #     file_path="static/html/index.html"+'?time='+str(time.time())
+    #     file_name = "index.html"
+    #     link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
+    #     iframe = iframe_generator(file_path)
+
+    #     # 和fn_design_modification接口不一样，不清楚用途，赋空值
+    #     modified_code = ""
+
+    #     return link, output_path, modified_code, iframe
 
     def fn_design_modification(code_modification_suggestion_string, generated_code):
         codegeneration.clear_static_html_dir()
@@ -127,12 +159,44 @@ if __name__ == "__main__":
         output_path = os.path.join(static_dir, "html.zip")
         zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
 
-        file_path = static_dir/"html/index.html"
+        file_path="static/html/index.html"+'?time='+str(time.time())
         file_name = "index.html"
         link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
         iframe = iframe_generator(file_path)
 
         return link, output_path, modified_code, iframe
+
+    # def fn_design_modification_aider(code_modification_suggestion_string, generated_code):
+
+    #     print("Design_Modification")
+
+    #     testdir = "static/html"
+    #     model_name = "gpt-3.5-turbo-0613"
+    #     edit_format = "whole"
+    #     tries = 2
+    #     no_unit_tests = True
+    #     no_aider = False
+    #     verbose = False
+    #     commit_hash = "e3aa9db-dirty"
+    #     edit_purpose = "code"
+    #     # repo = git.Repo(search_parent_directories=True)
+    #     # commit_hash = repo.head.object.hexsha[:7]
+    #     # if repo.is_dirty():
+    #     #     commit_hash += "-dirty"
+    #     modify_code_aider(code_modification_suggestion_string, edit_purpose, testdir, model_name, edit_format, tries, no_unit_tests, no_aider, verbose, commit_hash)
+
+    #     output_path = os.path.join(static_dir, "html.zip")
+    #     zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
+
+    #     file_path="static/html/index.html"+'?time='+str(time.time())
+    #     file_name = "index.html"
+    #     link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
+    #     iframe = iframe_generator(file_path)
+
+    #     # 和fn_design_modification接口不一样，不清楚用途，赋空值
+    #     modified_code = ""
+
+    #     return link, output_path, modified_code, iframe
 
     with gr.Blocks(title="Human in the loop") as app:
 
@@ -155,7 +219,7 @@ if __name__ == "__main__":
 
                             def change_vis():
                                 return gr.update(value=""), gr.update(visible=False)
-                            globals()["del_btn_{i}"].click(fn=change_vis,inputs=None, outputs=[globals()["scenario_textbox_{i}"], globals()["scenario_{i}"]])
+                            globals()["del_btn_{i}"].click(fn=change_vis, inputs=None, outputs=[globals()["scenario_textbox_{i}"], globals()["scenario_{i}"]])
                     else:
                         with gr.Row(visible=False) as globals()["scenario_{i}"]:
                             globals()["scenario_textbox_{i}"] = gr.Textbox(interactive=True, label=f"Scenario", lines=2, scale=9)
@@ -163,7 +227,7 @@ if __name__ == "__main__":
 
                             def change_vis():
                                 return gr.update(value=""), gr.update(visible=False)
-                            globals()["del_btn_{i}"].click(fn=change_vis, inputs=None,outputs=[globals()["scenario_textbox_{i}"], globals()["scenario_{i}"]])
+                            globals()["del_btn_{i}"].click(fn=change_vis, inputs=None, outputs=[globals()["scenario_textbox_{i}"], globals()["scenario_{i}"]])
 
                     scenarios_list.append(globals()["scenario_{i}"])
                     scenarios_textbox_list.append(globals()["scenario_textbox_{i}"])
@@ -184,9 +248,9 @@ if __name__ == "__main__":
                     gr_download_file = gr.File()
                     html = gr.HTML(label="HTML preview", show_label=True)
                     pass
-                with gr.Row():
-                    globals()["design_modification_textbox"] = gr.Textbox(label="Design Modification Suggestions", scale=9)
-                    code_design_modification_btn = gr.Button(value="Design Modification", scale=1)
+                # with gr.Row():
+                #     globals()["design_modification_textbox"] = gr.Textbox(label="Design Modification Suggestions", scale=9)
+                #     code_design_modification_btn = gr.Button(value="Design Modification", scale=1)
                 with gr.Row():
                     globals()["code_modification_textbox"] = gr.Textbox(label="Code Modification Suggestions", scale=9)
                     code_modification_btn = gr.Button(value="Code Modification", scale=1)
@@ -221,13 +285,12 @@ if __name__ == "__main__":
 
         code_modification_btn.click(fn=fn_code_modification, inputs=[globals()["code_modification_textbox"], generated_code_state],
                                     outputs=[html_markdown, gr_download_file, generated_code_state, html])
-        code_design_modification_btn.click(fn=fn_design_modification, inputs=[globals()["design_modification_textbox"], generated_code_state],
-                                           outputs=[html_markdown, gr_download_file, generated_code_state, html])
+        # code_design_modification_btn.click(fn=fn_design_modification_aider, inputs=[globals()["design_modification_textbox"], generated_code_state],
+        #                                    outputs=[html_markdown, gr_download_file, generated_code_state, html])
 
         logs = gr.Textbox(label="Log", max_lines=5)
-        app.load(read_logs, None, logs, every=1, queue=True, scroll_to_output=True)
+        app.load(read_logs, None, logs, every=3, queue=True, scroll_to_output=True)
 
     app.queue()
     # app.launch(show_error=True)
     app.launch()
-

@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    background-image: url('background.jpg');
+    background-color: rgba(253, 253, 253, 0.1);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav li {
+    margin-right: 1rem;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  main {
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0);
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  form textarea {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  #roll-call-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  #roll-call-btn:hover {
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #333;
+  }
+  
+  #roll-call-display {
+    display: none;
+    margin-top: 2rem;
+  }
+  
+  #student-name {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  #roll-again-btn {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  #roll-again-btn:hover {
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #333;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .contact-info p {
+    margin: 0;
+  }
+  
+  .social-media img {
+    width: 2rem;
+    margin-right: 1rem;
+  }
+  
+  .logo {
+    margin: 1rem;
+  }
+  
+  form textarea {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  

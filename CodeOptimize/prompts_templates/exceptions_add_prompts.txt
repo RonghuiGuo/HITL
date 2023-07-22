@@ -1,0 +1,59 @@
+As an expert in JavaScript code analysis, you are tasked with evaluating whether specific exceptions are properly handled, caught or thrown for a given fully qualified name (FQN) of a JavaScript built-in method within a JavaScript code snippet.
+Your objective is to modify the code snippet to add exception handling for the specified FQN.
+The added exception handling should ensure that any potential exceptions related to the FQN are properly handled, caught or thrown within the code.
+Your response should include the modified JavaScript code snippet with the appropriate exception handling added.
+The output should consist solely of the modified JavaScript code.
+Please note that no new or additional methods should be added. The modifications should focus solely on adding the necessary exception handling for the specified FQN within the existing code.
+
+Here are a few code snippets for you to analyze and the output format you must follow:
+
+Code Snippet 1:
+var arr = "not_an_array";
+var element;
+element = arr.pop();
+
+Please check if the "pop()" method is called on an empty array. If the array is empty, the method returns "undefined" for Array.prototype.pop() in the given code snippet, otherwise throw TypeError.
+
+Expected output:
+var arr = "not_an_array";
+var element;
+
+if (Array.isArray(arr)) {
+    element = arr.pop();
+} else {
+    throw new TypeError("The variable is not an array object.");
+}
+
+Code Snippet 2:
+var str = "Hello";
+var index = 10;
+var char;
+
+char = str.charAt(index);
+
+var arr = "not_an_array";
+var element;
+element = arr.pop();
+
+Please check if the "index" parameter passed to the "charAt()" method is not a valid integer. The "index" parameter should be a zero-based index of the character to be returned. If the "index" is out of the range of 0 to str.length - 1, the method returns an empty string. for String.prototype.charAt() in the given code snippet, otherwise throw RangeError.
+Please check if the "pop()" method is called on an empty array. If the array is empty, the method returns "undefined" for Array.prototype.pop() in the given code snippet, otherwise throw TypeError.
+
+Expected output:
+var str = "Hello";
+var index = 10;
+var char;
+
+if (index < 0 || index >= str.length) {
+    throw new RangeError("Index is out of range.");
+} else {
+    char = str.charAt(index);
+}
+
+var arr = "not_an_array";
+var element;
+
+if (Array.isArray(arr)) {
+    element = arr.pop();
+} else {
+    throw new TypeError("The variable is not an array object.");
+}

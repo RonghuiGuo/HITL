@@ -1,0 +1,25 @@
+function exampleFunc(a, b, c) {
+        var result = 'Unknown';
+
+        if (a > 10) {
+          result = 'Path A';
+        }
+
+        if (b === true)
+          if (result === 'Path A')
+            result = 'Path A + B';
+          } else {
+            result = 'Path B';
+          }
+        }
+
+        if (c < 0)
+          if (result === 'Path B') {
+            result = 'Path B + C';
+          } else {
+            result = 'Path C';
+          }
+        }
+
+          return result;
+        }

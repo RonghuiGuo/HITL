@@ -1,0 +1,42 @@
+code,DFG
+"function sumEvenNumbers(arr) {
+  var sum = 0;
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
+      sum += arr[i];
+    }
+  }
+  return sum;
+}
+
+dot.node('entry', 'Entry')
+dot.node('block1', 'var sum = 0')
+dot.node('block2', 'for (var i = 0; i < arr.length; i++)')
+dot.node('block3', 'if (arr[i] % 2 === 0)')
+dot.node('block4', 'sum += arr[i]')
+dot.node('block5', 'return sum')
+dot.node('exit', 'Exit')
+
+dot.edge('entry', 'block1')
+dot.edge('block1', 'block2')
+dot.edge('block2', 'block3', label='True')
+dot.edge('block2', 'exit', label='False')
+dot.edge('block3', 'block4', label='True')
+dot.edge('block3', 'block2', label='False')
+dot.edge('block4', 'block2')
+dot.edge('block5', 'exit')","dot.node('entry', 'Entry') # def:{} use:{}
+dot.node('block1', 'var sum = 0') # def:{sum} use:{}
+dot.node('block2', 'for (var i = 0; i < arr.length; i++)') # def:{i} use:{i, arr}
+dot.node('block3', 'if (arr[i] % 2 === 0)') # def:{} use:{arr, i}
+dot.node('block4', 'sum += arr[i]') # def:{sum} use:{sum, arr, i}
+dot.node('block5', 'return sum') #def:{}, use:{sum}
+dot.node('exit', 'Exit')
+
+dot.edge('entry', 'block1')
+dot.edge('block1', 'block2')
+dot.edge('block2', 'block3', label='True')
+dot.edge('block2', 'exit', label='False')
+dot.edge('block3', 'block4', label='True')
+dot.edge('block3', 'block2', label='False')
+dot.edge('block4', 'block2')
+dot.edge('block5', 'exit')"

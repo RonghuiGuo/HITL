@@ -17,6 +17,7 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 load_dotenv()
 
+
 class CodeGeneration():
     # #单例 保证只有一个实例
     # __instance = None
@@ -35,9 +36,6 @@ class CodeGeneration():
         openai.api_key = os.environ.get("openai_api_key")
         self.get_prompt()
         self.set_proxy()
-
-
-
 
     @staticmethod
     def set_proxy():
@@ -58,7 +56,6 @@ class CodeGeneration():
         pass
 
     def TopN_Feature2Scenarios(self, feature2scenarios_list, input_feature):
-
 
         similar_Feature2Scenarios = []
         # Define a function to calculate similarity score for a given feature
@@ -216,6 +213,7 @@ class CodeGeneration():
         Gherkin_NL = self.handel_extra_response(extra_response_count, messages, Gherkin_NL)
         Gherkin_NL = Gherkin_NL+response["choices"][0]["message"]["content"]
 
+        Gherkin_NL = "Scenario 1: " + Gherkin_NL
         Scenarios_NL_List = self.Scenario_NL_Parsing(Gherkin_NL)
         return Scenarios_NL_List
 
@@ -360,21 +358,44 @@ class CodeGeneration():
                     cv2.imwrite(osp.join(self.args.static_html_dir, img_url), cv2.imread(png_placeholder))
 
     # 使用正则表达式对生成的代码进行匹配，不一定准确
+    # def Code_Parsing(self, code):
+    #     code_split = re.split("index.html:|style.css:|script.js:", code)
+    #     try:
+    #         static_html_dir = Path(self.args.static_html_dir)
+    #         static_html_dir.mkdir(parents=True, exist_ok=True)
+    #         with open(osp.join(self.args.static_html_dir, 'index.html'), 'w') as f:
+    #             f.write(code_split[1])
+    #         with open(osp.join(self.args.static_html_dir, 'style.css'), 'w') as f:
+    #             f.write(code_split[2])
+    #         with open(osp.join(self.args.static_html_dir, 'script.js'), 'w') as f:
+    #             f.write(code_split[3])
+    #         self.Replace_Images()
+    #     except Exception as e:
+    #         # self.logger.info(e)
+    #         print(e)
+    #         return False
+    #     return True
 
     def Code_Parsing(self, code):
-        code_split = re.split("index.html:|style.css:|script.js:", code)
         try:
-            static_html_dir=Path(self.args.static_html_dir)
+            static_html_dir = Path(self.args.static_html_dir)
             static_html_dir.mkdir(parents=True, exist_ok=True)
+
+            index_pattern = r"index.html:\n```html(.*)```\nend index.html"
+            css_pattern = r"style.css:\n```css(.*)```\nend style.css"
+            javascript_pattern = r"script.js:\n```javascript(.*)```\nend script.js"
+            index_matches = re.findall(index_pattern, code, re.DOTALL)
+            css_matches = re.findall(css_pattern, code, re.DOTALL)
+            javascript_matches = re.findall(javascript_pattern, code, re.DOTALL)
+
             with open(osp.join(self.args.static_html_dir, 'index.html'), 'w') as f:
-                f.write(code_split[1])
+                f.write(index_matches[0])
             with open(osp.join(self.args.static_html_dir, 'style.css'), 'w') as f:
-                f.write(code_split[2])
+                f.write(css_matches[0])
             with open(osp.join(self.args.static_html_dir, 'script.js'), 'w') as f:
-                f.write(code_split[3])
+                f.write(javascript_matches[0])
             self.Replace_Images()
         except Exception as e:
-            # self.logger.info(e)
             print(e)
             return False
         return True
@@ -423,15 +444,12 @@ class CodeGeneration():
                 # self.logger.info("Code modification failed, please try again")
                 continue
 
-
     def clear_static_html_dir(self):
         static_html_dir = Path(self.args.static_html_dir)
         static_html_dir.mkdir(parents=True, exist_ok=True)
 
         for file in os.listdir(self.args.static_html_dir):
             os.remove(osp.join(self.args.static_html_dir, file))
-
-            
 
     def copyfile2static_html_dir(self, origin_dir):
         for file in os.listdir(origin_dir):

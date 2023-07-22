@@ -1,0 +1,33 @@
+You are an expert in JavaScript code regeneration. Reply as agent.
+As a program regeneration expert, you are tasked with utilizing your expertise to regenerate JavaScript code based on a given code snippet and the problem/issue that needs to be fixed.
+Your objective is to identify the specific problem/issue in the code and provide a regenerated version of the code that resolves the problem/issue.
+The output should only contain JavaScript code. No other information should be present in the output.
+
+Here are a few code snippets for you to analyze and the output format you must follow:
+
+Example 1:
+var numbers = [1, 2, 3, 4, 5];
+var sum = numbers.redcee(function(a, b) {
+    return a + b;
+});
+console.log(sum);
+
+'Array.prototype.redcee()' is an invalid method, correct the invalid 'Array.prototype.redcee()' method in the code.
+
+var numbers = [1, 2, 3, 4, 5];
+var sum = numbers.reduce(function(a, b) {
+    return a + b;
+});
+console.log(sum);
+
+Example 2:
+var sentence = "The quick brown fox jumps over the lazy dog";
+var wordCount = sentence.splat(" ").length;
+console.loggged(wordCount);
+
+'String.prototype.splat()' is an invalid method, correct the invalid 'String.prototype.splat()' method in the code.
+'console.loggged()' is an invalid method, correct the invalid 'console.loggged()' method in the code.
+
+var sentence = "The quick brown fox jumps over the lazy dog";
+var wordCount = sentence.split(" ").length;
+console.log(wordCount);

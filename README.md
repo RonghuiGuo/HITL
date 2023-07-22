@@ -1,59 +1,22 @@
 
 ## 演示记录:
 
+### Feature
 Please generate a web page with a random roll call function.
+
+Generate a roll call statistics system, you can add students, delete students, click to confirm the record check-in date.
+
+
+### Code Modification
+
+I want the background to be red.
 
 
 ## Problems:
 
-model由gpt-3.5-turbo改成gpt-3.5-turbo-0613后结果会发生很大的变化
+model由gpt-3.5-turbo-0301改成gpt-3.5-turbo-0613后结果会发生很大的变化
 
 
-## Error:
-
-可能是此bug导致log框输出不了
-
-- https://github.com/gradio-app/gradio/issues/2290
-- https://github.com/gradio-app/gradio/issues/2261
-- https://github.com/gradio-app/gradio/issues/4061
-
-
-ERROR OUTPUT:
-```
-future: <Task finished name='oqhjdrbdel_15' coro=<Queue.process_events() done, defined at /home/user/.local/lib/python3.10/site-packages/gradio/queueing.py:342> exception=ValueError('[<gradio.queueing.Event object at 0x7febc752c820>] is not in list')>
-Traceback (most recent call last):
-  File "/home/user/.local/lib/python3.10/site-packages/gradio/queueing.py", line 369, in process_events
-    while response.json.get("is_generating", False):
-  File "/home/user/.local/lib/python3.10/site-packages/gradio/utils.py", line 543, in json
-    return self._json_response_data
-AttributeError: 'AsyncRequest' object has no attribute '_json_response_data'
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/user/.local/lib/python3.10/site-packages/gradio/queueing.py", line 424, in process_events
-    self.active_jobs[self.active_jobs.index(events)] = None
-ValueError: [<gradio.queueing.Event object at 0x7febc752c820>] is not in list
-```
-
-```
-# line 425
-/home/user/.local/lib/python3.10/site-packages/gradio/queueing.py
-```
-
-
-
-```
-self.active_jobs[self.active_jobs.index(events)] = None
-```
-
-to
-
-```
-try:
-    self.active_jobs[self.active_jobs.index(events)] = None
-except Exception:
-```
 
 
 

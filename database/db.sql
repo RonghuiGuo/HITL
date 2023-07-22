@@ -5,4 +5,4 @@
 SELECT * FROM "index_feature2scenariostable";
 
 
-DELETE FROM "index_feature2scenariostable" WHERE id=6
+DELETE FROM "index_feature2scenariostable" WHERE id>2
