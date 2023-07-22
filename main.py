@@ -12,7 +12,7 @@ from utils.CodeGeneration import CodeGeneration
 from utils.utils import zip_folder, iframe_generator
 from database.DB_Tools import DB_Tools
 from dotenv import load_dotenv
-from AiderModify.ModifyCodeAider import modify_code_aider
+# from AiderModify.ModifyCodeAider import modify_code_aider
 
 # ----------log----------------
 sys.stdout = Logger("logs/logs.log")
@@ -91,7 +91,7 @@ if __name__ == "__main__":
         print("Code_generation")
         Generated_code, loop_number = codegeneration.Code_generation(Visual_design_template, Design_page_template, input_feature, Gherkin_result)
 
-        file_path = static_dir/"html/index.html"
+        file_path="static/html/index.html"+'?time='+str(time.time())
         file_name = "index.html"
         link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
 
@@ -114,43 +114,43 @@ if __name__ == "__main__":
         output_path = os.path.join(static_dir, "html.zip")
         zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
 
-        file_path = static_dir/"html/index.html"
+        file_path="static/html/index.html"+'?time='+str(time.time())
         file_name = "index.html"
         link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
         iframe = iframe_generator(file_path)
 
         return link, output_path, modified_code, iframe
 
-    def fn_code_modification_aider(code_modification_suggestion_string, generated_code):
-        print("Code_Modification")
+    # def fn_code_modification_aider(code_modification_suggestion_string, generated_code):
+    #     print("Code_Modification")
 
-        testdir = "static/html"
-        model_name = "gpt-3.5-turbo-0613"
-        edit_format = "whole"
-        tries = 2
-        no_unit_tests = True
-        no_aider = False
-        verbose = False
-        commit_hash = "e3aa9db-dirty"
-        edit_purpose = "code"
-        # repo = git.Repo(search_parent_directories=True)
-        # commit_hash = repo.head.object.hexsha[:7]
-        # if repo.is_dirty():
-        #     commit_hash += "-dirty"
-        modify_code_aider(code_modification_suggestion_string, edit_purpose, testdir, model_name, edit_format, tries, no_unit_tests, no_aider, verbose, commit_hash)
+    #     testdir = "static/html"
+    #     model_name = "gpt-3.5-turbo-0613"
+    #     edit_format = "whole"
+    #     tries = 2
+    #     no_unit_tests = True
+    #     no_aider = False
+    #     verbose = False
+    #     commit_hash = "e3aa9db-dirty"
+    #     edit_purpose = "code"
+    #     # repo = git.Repo(search_parent_directories=True)
+    #     # commit_hash = repo.head.object.hexsha[:7]
+    #     # if repo.is_dirty():
+    #     #     commit_hash += "-dirty"
+    #     modify_code_aider(code_modification_suggestion_string, edit_purpose, testdir, model_name, edit_format, tries, no_unit_tests, no_aider, verbose, commit_hash)
 
-        output_path = os.path.join(static_dir, "html.zip")
-        zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
+    #     output_path = os.path.join(static_dir, "html.zip")
+    #     zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
 
-        file_path = static_dir/"html/index.html"
-        file_name = "index.html"
-        link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
-        iframe = iframe_generator(file_path)
+    #     file_path="static/html/index.html"+'?time='+str(time.time())
+    #     file_name = "index.html"
+    #     link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
+    #     iframe = iframe_generator(file_path)
 
-        # 和fn_design_modification接口不一样，不清楚用途，赋空值
-        modified_code = ""
+    #     # 和fn_design_modification接口不一样，不清楚用途，赋空值
+    #     modified_code = ""
 
-        return link, output_path, modified_code, iframe
+    #     return link, output_path, modified_code, iframe
 
     def fn_design_modification(code_modification_suggestion_string, generated_code):
         codegeneration.clear_static_html_dir()
@@ -159,44 +159,44 @@ if __name__ == "__main__":
         output_path = os.path.join(static_dir, "html.zip")
         zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
 
-        file_path = static_dir/"html/index.html"
+        file_path="static/html/index.html"+'?time='+str(time.time())
         file_name = "index.html"
         link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
         iframe = iframe_generator(file_path)
 
         return link, output_path, modified_code, iframe
 
-    def fn_design_modification_aider(code_modification_suggestion_string, generated_code):
+    # def fn_design_modification_aider(code_modification_suggestion_string, generated_code):
 
-        print("Design_Modification")
+    #     print("Design_Modification")
 
-        testdir = "static/html"
-        model_name = "gpt-3.5-turbo-0613"
-        edit_format = "whole"
-        tries = 2
-        no_unit_tests = True
-        no_aider = False
-        verbose = False
-        commit_hash = "e3aa9db-dirty"
-        edit_purpose = "code"
-        # repo = git.Repo(search_parent_directories=True)
-        # commit_hash = repo.head.object.hexsha[:7]
-        # if repo.is_dirty():
-        #     commit_hash += "-dirty"
-        modify_code_aider(code_modification_suggestion_string, edit_purpose, testdir, model_name, edit_format, tries, no_unit_tests, no_aider, verbose, commit_hash)
+    #     testdir = "static/html"
+    #     model_name = "gpt-3.5-turbo-0613"
+    #     edit_format = "whole"
+    #     tries = 2
+    #     no_unit_tests = True
+    #     no_aider = False
+    #     verbose = False
+    #     commit_hash = "e3aa9db-dirty"
+    #     edit_purpose = "code"
+    #     # repo = git.Repo(search_parent_directories=True)
+    #     # commit_hash = repo.head.object.hexsha[:7]
+    #     # if repo.is_dirty():
+    #     #     commit_hash += "-dirty"
+    #     modify_code_aider(code_modification_suggestion_string, edit_purpose, testdir, model_name, edit_format, tries, no_unit_tests, no_aider, verbose, commit_hash)
 
-        output_path = os.path.join(static_dir, "html.zip")
-        zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
+    #     output_path = os.path.join(static_dir, "html.zip")
+    #     zip_folder(folder_path=codegeneration.args.static_html_dir, output_path=output_path)
 
-        file_path = static_dir/"html/index.html"
-        file_name = "index.html"
-        link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
-        iframe = iframe_generator(file_path)
+    #     file_path="static/html/index.html"+'?time='+str(time.time())
+    #     file_name = "index.html"
+    #     link = f'<a href="file={file_path}" target="_blank">{file_name}</a>'
+    #     iframe = iframe_generator(file_path)
 
-        # 和fn_design_modification接口不一样，不清楚用途，赋空值
-        modified_code = ""
+    #     # 和fn_design_modification接口不一样，不清楚用途，赋空值
+    #     modified_code = ""
 
-        return link, output_path, modified_code, iframe
+    #     return link, output_path, modified_code, iframe
 
     with gr.Blocks(title="Human in the loop") as app:
 

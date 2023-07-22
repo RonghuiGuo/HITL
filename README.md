@@ -1,9 +1,15 @@
 
 ## 演示记录:
 
+### Feature
 Please generate a web page with a random roll call function.
 
 Generate a roll call statistics system, you can add students, delete students, click to confirm the record check-in date.
+
+
+### Code Modification
+
+I want the background to be red.
 
 
 ## Problems:
